@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Notably</string>
     <string name="action_settings">Settings</string>
+
+
+    <string name="note_image_descrip_reminder_icon">reminder icon</string>
+
 </resources>
