@@ -2,8 +2,14 @@ package fel.cvut.cz.notably;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
@@ -11,7 +17,21 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import fel.cvut.cz.notably.entity.Note;
+
 public class MainActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private TextView textNoNote;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private NoteRecyclerViewAdapter viewAdapter;
+    private List<Note> noteList, selectedItemID;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +48,32 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
+        textNoNote = findViewById(R.id.textNoNote);
+        recyclerView = findViewById(R.id.recyclerView);
+        drawerLayout=findViewById(R.id.drawerLayout);
+        navigationView=findViewById(R.id.navView);
+
+        //This will place a Navigation Drawer icon on the Tool bar
+        //When Clicked it will open the Navigation Drawer and Animation happens on the icon
+        ActionBarDrawerToggle actionBarDrawerToggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+
+        noteList = new ArrayList<>();
+        selectedItemID = new ArrayList<>();
+
+        viewAdapter = new NoteRecyclerViewAdapter(noteList, this, selectedItemID);
+        recyclerView.setAdapter(viewAdapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+        //viewAdapter.setActionModeReceiver(this,this);
+
+
+
 
 
     }
