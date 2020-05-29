@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/saveNote"
+        android:checkable="false"
+        android:enabled="false"
+        android:icon="@drawable/ic_save"
+        android:title="Save"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/add_picture"
+        app:showAsAction="collapseActionView"
+        android:title="Add picture"/>
+
+    <item
+        android:id="@+id/add_reminder"
+        app:showAsAction="collapseActionView"
+        android:title="Add reminder"/>
+    <item
+        android:id="@+id/add_location"
+        app:showAsAction="collapseActionView"
+        android:title="Add location"/>
+    <item
+        android:id="@+id/delete_note"
+        app:showAsAction="collapseActionView"
+        android:title="Delete"/>
+    <item
+        android:id="@+id/copy_note"
+        app:showAsAction="collapseActionView"
+        android:title="Copy"/>
+
+
+
+
+
+<!--    <item
+        android:id="@+id/addReminder"
+        android:icon="@drawable/ic_add_alert"
+        android:title="Reminder"
+        app:showAsAction="ifRoom"/>-->
+
+</menu>

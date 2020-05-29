@@ -8,13 +8,13 @@
     android:scrollbars="vertical"
     android:id="@+id/addFragContainer">
 
-    <include layout="@layout/toolbar"/>
+<!--    <include layout="@layout/toolbar"/>-->
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="57dp"
+        android:layout_marginTop="0dp"
         android:orientation="horizontal"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"

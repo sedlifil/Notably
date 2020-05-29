@@ -1,5 +1,7 @@
 package fel.cvut.cz.notably;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -40,16 +42,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-
         textNoNote = findViewById(R.id.textNoNote);
         recyclerView = findViewById(R.id.recyclerView);
         drawerLayout=findViewById(R.id.drawerLayout);
@@ -72,8 +64,57 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
         //viewAdapter.setActionModeReceiver(this,this);
 
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, AddNoteActivity.class));
+            }
+        });
+/*
+        private void displayAllNote() {
+            noteList.clear();
+            selectedItemID.clear();
+
+            noteDB.open();
+            Cursor cursor = noteDB.getAllNotes();
+            while (cursor.moveToNext()) {
+                noteList.add(new NoteItems
+                        (cursor.getInt(0),
+                                cursor.getString(1),
+                                cursor.getString(2),
+                                cursor.getString(3)));
+                //Log.d("My Tag",cursor.getLong(4)+"\t\t"+cursor.getInt(5)+"\t\t"+cursor.getString(6));
+            }
+            setRecyclerViewVisibility();
+            viewAdapter.notifyDataSetChanged();
+            noteDB.close();
+
+            viewAdapter.updateFilterNoteList(noteList);
+        }
 
 
+        private void displayAllReminderNote(){
+            noteList.clear();
+            selectedItemID.clear();
+
+            noteDB.open();
+            Cursor cursor = noteDB.getAllReminderNotes();
+            while (cursor.moveToNext()) {
+                noteList.add(new NoteItems
+                        (cursor.getInt(0),
+                                cursor.getString(1),
+                                cursor.getString(2),
+                                cursor.getString(3)));
+                //Log.d("My Tag",cursor.getLong(4)+"\t\t"+cursor.getInt(5)+"\t\t"+cursor.getString(6));
+            }
+            setRecyclerViewVisibility();
+            viewAdapter.notifyDataSetChanged();
+            noteDB.close();
+
+            viewAdapter.updateFilterNoteList(noteList);
+        }
+*/
 
 
     }
