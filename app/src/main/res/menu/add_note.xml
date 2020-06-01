@@ -3,13 +3,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/saveNote"
-        android:checkable="false"
-        android:enabled="false"
-        android:icon="@drawable/ic_save"
-        android:title="Save"
-        app:showAsAction="ifRoom" />
+
     <item
         android:id="@+id/add_picture"
         app:showAsAction="collapseActionView"
@@ -33,7 +27,11 @@
         android:title="Copy"/>
 
 
-
+    <item
+        android:id="@+id/saveNote"
+        android:icon="@drawable/ic_save"
+        android:title="Save"
+        app:showAsAction="ifRoom" />
 
 
 <!--    <item

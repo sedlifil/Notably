@@ -9,7 +9,7 @@
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
-    <RelativeLayout
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -25,19 +25,15 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            android:layout_marginTop="57dp"
-            android:visibility="gone" />
 
-    </RelativeLayout>
+
+    </RelativeLayout>-->
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <include layout="@layout/toolbar"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
@@ -53,6 +49,16 @@
             android:src="@drawable/ic_add"
             app:backgroundTint="@color/colorPrimary"
             app:fabSize="normal" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="1200dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="57dp"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/notes"
+            />
 
     </android.support.design.widget.CoordinatorLayout>
 

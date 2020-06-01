@@ -33,8 +33,6 @@ NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerViewAdapter.Not
     private OnItemClick onItemClickReceiver;
 
 
-
-
     /**
      * This interface will be called when a view is long clicked
      * to be able to highlight the selected item view
@@ -121,6 +119,7 @@ NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerViewAdapter.Not
     @Override
     public void onBindViewHolder(@NonNull final NoteViewHolder noteViewHolder, final int position) {
         final Note noteItems = noteList.get(position);
+        System.out.println("onBindViewHolder" +noteList.size());
 
         //noteViewHolder.textID.setText(String.valueOf(noteItems.g()));
         noteViewHolder.textTitle.setText(noteItems.getTitle());
@@ -238,6 +237,11 @@ NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerViewAdapter.Not
 
     public void unSelectAllNote() {
         selectedItemID.clear();
+        notifyDataSetChanged();
+    }
+
+    public void setNoteList(List<Note> noteList) {
+        this.noteList = noteList;
         notifyDataSetChanged();
     }
 
