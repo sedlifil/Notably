@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NoteRecyclerViewA
         selectedItemID = new ArrayList<>();
 
         System.out.println("Adapter test"+ noteList.size());
-        viewAdapter = new NoteRecyclerViewAdapter(noteList, this, selectedItemID);
+        viewAdapter = new NoteRecyclerViewAdapter(noteList,this, selectedItemID);
         recyclerView.setAdapter(viewAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
         viewAdapter.setActionModeReceiver(this,this);
@@ -99,78 +99,22 @@ public class MainActivity extends AppCompatActivity implements NoteRecyclerViewA
         });
 
 
-
-
-        //displayAllNote();
-/*
-        private void displayAllNote() {
-            noteList.clear();
-            selectedItemID.clear();
-
-            noteDB.open();
-            Cursor cursor = noteDB.getAllNotes();
-            while (cursor.moveToNext()) {
-                noteList.add(new NoteItems
-                        (cursor.getInt(0),
-                                cursor.getString(1),
-                                cursor.getString(2),
-                                cursor.getString(3)));
-                //Log.d("My Tag",cursor.getLong(4)+"\t\t"+cursor.getInt(5)+"\t\t"+cursor.getString(6));
-            }
-            setRecyclerViewVisibility();
-            viewAdapter.notifyDataSetChanged();
-            noteDB.close();
-
-            viewAdapter.updateFilterNoteList(noteList);
-        }
-
-
-        private void displayAllReminderNote(){
-            noteList.clear();
-            selectedItemID.clear();
-
-            noteDB.open();
-            Cursor cursor = noteDB.getAllReminderNotes();
-            while (cursor.moveToNext()) {
-                noteList.add(new NoteItems
-                        (cursor.getInt(0),
-                                cursor.getString(1),
-                                cursor.getString(2),
-                                cursor.getString(3)));
-                //Log.d("My Tag",cursor.getLong(4)+"\t\t"+cursor.getInt(5)+"\t\t"+cursor.getString(6));
-            }
-            setRecyclerViewVisibility();
-            viewAdapter.notifyDataSetChanged();
-            noteDB.close();
-
-            viewAdapter.updateFilterNoteList(noteList);
-        }
-*/
-
-
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         if ( resultCode == RESULT_OK) {
             Note note = (Note) data.getSerializableExtra(AddNoteActivity.EXTRA_REPLY);
-            System.out.println("INSERT NOOOOOT");
-//            // Update the database
-//            if (home.getHid() > 0) {
-//                Log.i(TAG, "Update home id: " + home.getHid());
-//                mHomeViewModel.update(home);
-//                // Insert the database
-//            } else {
-//                Log.i(TAG, "Insert home id: " + home.getHid());
-//                mHomeViewModel.insert(home);
+            Toast.makeText(
+                    getApplicationContext(),
+                    "Note saved",
+                    Toast.LENGTH_LONG).show();
             noteViewModel.insert(note);
-            System.out.println("jgjhgjhg");
             }
          else {
             Toast.makeText(
                     getApplicationContext(),
-                    "ERRROROROROROROOR",
+                    "Note not saved",
                     Toast.LENGTH_LONG).show();
         }
     }

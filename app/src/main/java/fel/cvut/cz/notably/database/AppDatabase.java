@@ -8,7 +8,7 @@ import android.content.Context;
 import fel.cvut.cz.notably.dao.NoteDao;
 import fel.cvut.cz.notably.entity.Note;
 
-@Database(entities = {Note.class},version = 1)
+@Database(entities = {Note.class},version = 5)
 
 public abstract class AppDatabase extends RoomDatabase {
 

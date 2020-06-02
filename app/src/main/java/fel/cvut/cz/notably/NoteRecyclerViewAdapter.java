@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerViewAdapter.Not
     private Context context;
     private OnItemLongClick onItemLongClickReceiver;
     private OnItemClick onItemClickReceiver;
+    private Layout layout;
 
 
     /**
@@ -52,7 +54,7 @@ NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerViewAdapter.Not
         void onItemClick();
     }
 
-    public NoteRecyclerViewAdapter(List<Note> noteList, Context context, List<Note> selectedItemID) {
+    public NoteRecyclerViewAdapter( List<Note> noteList, Context context, List<Note> selectedItemID) {
         this.noteList = noteList;
         this.context = context;
         this.selectedItemID = selectedItemID;
@@ -118,14 +120,14 @@ NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerViewAdapter.Not
 
     @Override
     public void onBindViewHolder(@NonNull final NoteViewHolder noteViewHolder, final int position) {
-        final Note noteItems = noteList.get(position);
-        System.out.println("onBindViewHolder" +noteList.size());
+        Note noteItem = noteList.get(position);
+        System.out.println("onBindViewHolder" + noteList.size());
 
         //noteViewHolder.textID.setText(String.valueOf(noteItems.g()));
-        noteViewHolder.textTitle.setText(noteItems.getTitle());
-        noteViewHolder.textNote.setText(noteItems.getText());
+        noteViewHolder.textTitle.setText(noteItem.getTitle());
+        noteViewHolder.textNote.setText(noteItem.getText());
         //noteViewHolder.textDateTime.setText(noteItems.getDateTime());
-
+        noteViewHolder.reminderIcon.setVisibility(View.GONE);
 //        //if a note has reminder show an icon on it's recycler view else don't
 //        noteDB.open();
 //        Cursor cursor = noteDB.getSelectedNote(noteItems.getId());
@@ -155,25 +157,21 @@ NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerViewAdapter.Not
 //        noteViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(context);
-//                boolean itemIsLongClicked=sharedPreferences.getBoolean(MainActivity.ITEM_IS_LONG_CLICKED,false);
-//
-//                if (itemIsLongClicked){
-//                    if (selectedItemID.contains(noteItems)) {
-//                        selectedItemID.remove(noteItems);
-//                        unHighlightView(noteViewHolder);
-//                    } else {
-//                        selectedItemID.add(noteItems);
-//                        highlightView(noteViewHolder);
-//                    }
-//                    onItemClickReceiver.onItemClick();
-//                }else {
-//                    Intent editNoteIntent = new Intent(context, EditNoteActivity.class);
-//                    editNoteIntent.putExtra("NOTE_ID", noteList.get(position).getId());
-//                    context.startActivity(editNoteIntent);
-//                }
+//                System.out.println("note item id: " + noteItem.getId());
+//                Intent editNoteIntent = new Intent(context, EditNoteActivity.class);
+//                editNoteIntent.putExtra("note_id", noteItem.getId());
+//                context.startActivity(editNoteIntent);
 //            }
 //        });
+        noteViewHolder.itemView.setOnClickListener(view -> {
+            Intent editNoteIntent = new Intent(context, EditNoteActivity.class);
+            editNoteIntent.putExtra("note_id", noteItem.getId());
+            context.startActivity(editNoteIntent);
+
+        });
+
+
+
 //
 //        noteViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
 //            @Override
@@ -241,6 +239,7 @@ NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerViewAdapter.Not
     }
 
     public void setNoteList(List<Note> noteList) {
+//        if (noteList != null) System.out.println("Set note list size: " + noteList.size());
         this.noteList = noteList;
         notifyDataSetChanged();
     }
